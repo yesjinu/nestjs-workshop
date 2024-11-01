@@ -1,6 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { Cacheable, CacheEvict } from './cache.decorator';
 import { CacheService } from './cache.service';
+import { InMemoryCacheServiceImpl } from './adapter/in-memory.cache.service';
 
 describe('Cacheable Decorator', () => {
   let cacheService: CacheService;
@@ -21,7 +22,12 @@ describe('Cacheable Decorator', () => {
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [CacheService],
+      providers: [
+        {
+          provide: CacheService,
+          useClass: InMemoryCacheServiceImpl,
+        },
+      ],
     }).compile();
 
     cacheService = module.get<CacheService>(CacheService);
@@ -76,13 +82,17 @@ describe('Cacheable Decorator', () => {
     const testInstance = new TestClass(cacheService);
 
     await testInstance.save('test');
-    expect(cacheService.getAll().get('TestClass:save:["test"]')).toBeDefined();
+    expect(
+      (await cacheService.getAll()).get('TestClass:save:["test"]'),
+    ).toBeDefined();
     await testInstance.delete('test');
     expect(
-      cacheService.getAll().get('TestClass:save:["test"]'),
+      (await cacheService.getAll()).get('TestClass:save:["test"]'),
     ).toBeUndefined();
     await testInstance.save('test');
-    expect(cacheService.getAll().get('TestClass:save:["test"]')).toBeDefined();
+    expect(
+      (await cacheService.getAll()).get('TestClass:save:["test"]'),
+    ).toBeDefined();
   });
 
   it('should not evict other methods cache', async () => {
@@ -92,8 +102,10 @@ describe('Cacheable Decorator', () => {
     await testInstance.save('test2');
     await testInstance.delete('test');
     expect(
-      cacheService.getAll().get('TestClass:save:["test"]'),
+      (await cacheService.getAll()).get('TestClass:save:["test"]'),
     ).toBeUndefined();
-    expect(cacheService.getAll().get('TestClass:save:["test2"]')).toBeDefined();
+    expect(
+      (await cacheService.getAll()).get('TestClass:save:["test2"]'),
+    ).toBeDefined();
   });
 });

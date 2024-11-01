@@ -19,13 +19,11 @@ export function Cacheable(_: { ttl: number }) {
     descriptor.value = async function (...args: any[]) {
       const cacheService: CacheService = (this as any).cacheService;
       if (!cacheService) {
-        throw new Error(
-          `${CacheService.name} must be injected to use @Cacheable`,
-        );
+        throw new Error(`CacheService must be injected to use @Cacheable`);
       }
 
       const cacheKey = `${className}:${propertyKey}:${JSON.stringify(args)}`;
-      const cachedResult = cacheService.get(cacheKey);
+      const cachedResult = await cacheService.get(cacheKey);
 
       if (cachedResult !== null) {
         Logger.debug(
@@ -36,7 +34,7 @@ export function Cacheable(_: { ttl: number }) {
 
       Logger.debug(`Cache miss: ${cacheKey}`);
       const result = await originalMethod.apply(this, args);
-      cacheService.set(cacheKey, result, ttl);
+      await cacheService.set(cacheKey, result, ttl);
       return result;
     };
 
@@ -64,9 +62,7 @@ export function CacheEvict(options: CacheEvictOptions) {
     descriptor.value = async function (...args: any[]) {
       const cacheService: CacheService = (this as any).cacheService;
       if (!cacheService) {
-        throw new Error(
-          `${CacheService.name} must be injected to use @CacheEvict`,
-        );
+        throw new Error(`CacheService must be injected to use @CacheEvict`);
       }
 
       const result = await originalMethod.apply(this, args);
