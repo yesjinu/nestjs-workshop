@@ -1,11 +1,13 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { Cacheable, CacheEvict, CacheService } from '../../../libs/cache/src';
 
 @Injectable()
 export class CacheableDemoService {
-  constructor(private readonly cacheService: CacheService) {}
+  constructor(
+    @Inject(CacheService) private readonly cacheService: CacheService,
+  ) {}
 
-  @Cacheable({ ttl: 30 }) // Cache for 30 seconds
+  @Cacheable({ ttl: 1 }) // Cache for 1 seconds
   async getRandomUUID(): Promise<string> {
     return crypto.randomUUID();
   }

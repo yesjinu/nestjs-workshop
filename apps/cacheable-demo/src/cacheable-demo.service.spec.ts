@@ -12,26 +12,20 @@ describe('CacheableDemoService', () => {
     }).compile();
 
     service = module.get<CacheableDemoService>(CacheableDemoService);
-
-    // Enable fake timers
-    jest.useFakeTimers();
-  });
-
-  afterEach(() => {
-    jest.useRealTimers();
   });
 
   describe('getExpensiveData', () => {
-    it('should cache data for 30 seconds', async () => {
+    it('should cache data for 1 seconds', async () => {
       const result1 = await service.getRandomUUID();
       const result2 = await service.getRandomUUID();
       expect(result1).toBe(result2);
 
-      jest.advanceTimersByTime(29000); // 29 seconds, cache still valid
+      // wait 500 ms, cache still valid
+      await new Promise((resolve) => setTimeout(resolve, 500));
       const result3 = await service.getRandomUUID();
       expect(result3).toBe(result1);
 
-      jest.advanceTimersByTime(2000); // 31 seconds, cache expired
+      await new Promise((resolve) => setTimeout(resolve, 500)); // 1 sec, cache expired
       const result4 = await service.getRandomUUID();
       expect(result4).not.toBe(result1); // Cache expired, counter should increment
     });

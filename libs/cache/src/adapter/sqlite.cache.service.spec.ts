@@ -16,8 +16,6 @@ describe('CacheService', () => {
     }).compile();
 
     service = module.get<CacheService>(CacheService) as SqliteCacheServiceImpl;
-    // Initialize the database
-    await service.onModuleInit();
   });
 
   afterEach(async () => {

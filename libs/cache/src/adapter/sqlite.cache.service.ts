@@ -1,10 +1,15 @@
-import { Injectable, OnModuleInit } from '@nestjs/common';
+import { Injectable, Logger, OnModuleInit } from '@nestjs/common';
 import { CacheService } from '../cache.service';
 import * as sqlite3 from 'better-sqlite3';
 
 @Injectable()
 export class SqliteCacheServiceImpl implements CacheService, OnModuleInit {
   private db: any;
+
+  constructor() {
+    Logger.log('SqliteCacheServiceImpl constructor');
+    this.onModuleInit();
+  }
 
   onModuleInit() {
     this.db = new sqlite3('cache.db');

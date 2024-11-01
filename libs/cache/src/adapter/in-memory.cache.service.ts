@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { CacheService } from '../cache.service';
 
 interface CacheItem<T> {
@@ -9,6 +9,10 @@ interface CacheItem<T> {
 @Injectable()
 export class InMemoryCacheServiceImpl implements CacheService {
   private cache: Map<string, CacheItem<any>> = new Map();
+
+  constructor() {
+    Logger.log('InMemoryCacheServiceImpl constructor');
+  }
 
   /**
    * Set cache item with ttl.
