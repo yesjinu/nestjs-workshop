@@ -1,21 +1,28 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { CacheService } from './cache.service';
-import { InMemoryCacheServiceImpl } from './adapter/in-memory.cache.service';
+import { CacheService } from '../cache.service';
+import { SqliteCacheServiceImpl } from './sqlite.cache.service';
 
 describe('CacheService', () => {
-  let service: CacheService;
+  let service: SqliteCacheServiceImpl;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
         {
           provide: CacheService,
-          useClass: InMemoryCacheServiceImpl,
+          useClass: SqliteCacheServiceImpl,
         },
       ],
     }).compile();
 
-    service = module.get<CacheService>(CacheService);
+    service = module.get<CacheService>(CacheService) as SqliteCacheServiceImpl;
+    // Initialize the database
+    await service.onModuleInit();
+  });
+
+  afterEach(async () => {
+    // Clean up after each test
+    await service.clearAll();
   });
 
   it('should set and get a value', async () => {
