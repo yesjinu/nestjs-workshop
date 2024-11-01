@@ -18,14 +18,6 @@ describe('GlobalExceptionHandlerDemoController', () => {
       );
   });
 
-  describe('root', () => {
-    it('should return "Hello World!"', () => {
-      expect(globalExceptionHandlerDemoController.getHello()).toBe(
-        'Hello World!',
-      );
-    });
-  });
-
   describe('throw error', () => {
     it('should throw error', () => {
       expect(async () => {
