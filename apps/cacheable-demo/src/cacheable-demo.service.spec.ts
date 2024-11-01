@@ -39,4 +39,12 @@ describe('CacheableDemoService', () => {
       expect(result2).not.toBe(result1);
     });
   });
+
+  describe('setCache & getCache', () => {
+    it('should set and get cache', async () => {
+      await service.setCache('test', 'test');
+      const result = await service.getCache('test');
+      expect(result).toBe('test');
+    });
+  });
 });
