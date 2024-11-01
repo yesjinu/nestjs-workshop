@@ -19,3 +19,9 @@ nest generate lib app_name
 - [x] Global Exception Filter
 - [ ] Async local storage
 - [ ] Id generator
+- [ ] Guard
+- [ ] Database ORM
+- [ ] Logger
+- [ ] Health check
+- [ ] Metrics
+- [ ] Tracing
