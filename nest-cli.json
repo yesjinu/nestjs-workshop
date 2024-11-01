@@ -43,6 +43,15 @@
       "compilerOptions": {
         "tsConfigPath": "libs/exception-filter/tsconfig.lib.json"
       }
+    },
+    "global-exception-handler-demo": {
+      "type": "application",
+      "root": "apps/global-exception-handler-demo",
+      "entryFile": "main",
+      "sourceRoot": "apps/global-exception-handler-demo/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/global-exception-handler-demo/tsconfig.app.json"
+      }
     }
   },
   "monorepo": true,

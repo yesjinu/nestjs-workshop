@@ -15,6 +15,7 @@ nest generate lib app_name
 
 
 # TODO
-- [ ] Global Exception Filter
+- [x] Cache
+- [x] Global Exception Filter
 - [ ] Async local storage
 - [ ] Id generator
