@@ -23,6 +23,12 @@
       ],
       "@app/cacheable/*": [
         "libs/cache/src/*"
+      ],
+      "@app/exception-filter": [
+        "libs/exception-filter/src"
+      ],
+      "@app/exception-filter/*": [
+        "libs/exception-filter/src/*"
       ]
     }
   }
