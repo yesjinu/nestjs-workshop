@@ -1,8 +1,41 @@
 {
   "$schema": "https://json.schemastore.org/nest-cli",
   "collection": "@nestjs/schematics",
-  "sourceRoot": "src",
+  "sourceRoot": "apps/nestjs-workshop/src",
   "compilerOptions": {
-    "deleteOutDir": true
-  }
+    "deleteOutDir": true,
+    "webpack": true,
+    "tsConfigPath": "apps/nestjs-workshop/tsconfig.app.json"
+  },
+  "projects": {
+    "cacheable": {
+      "type": "library",
+      "root": "libs/cacheable",
+      "entryFile": "index",
+      "sourceRoot": "libs/cacheable/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/cacheable/tsconfig.lib.json"
+      }
+    },
+    "nestjs-workshop": {
+      "type": "application",
+      "root": "apps/nestjs-workshop",
+      "entryFile": "main",
+      "sourceRoot": "apps/nestjs-workshop/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/nestjs-workshop/tsconfig.app.json"
+      }
+    },
+    "cacheable-demo": {
+      "type": "application",
+      "root": "apps/cacheable-demo",
+      "entryFile": "main",
+      "sourceRoot": "apps/cacheable-demo/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/cacheable-demo/tsconfig.app.json"
+      }
+    }
+  },
+  "monorepo": true,
+  "root": "apps/nestjs-workshop"
 }

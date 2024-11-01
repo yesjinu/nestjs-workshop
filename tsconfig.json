@@ -16,6 +16,14 @@
     "noImplicitAny": false,
     "strictBindCallApply": false,
     "forceConsistentCasingInFileNames": false,
-    "noFallthroughCasesInSwitch": false
+    "noFallthroughCasesInSwitch": false,
+    "paths": {
+      "@app/cacheable": [
+        "libs/cache/src"
+      ],
+      "@app/cacheable/*": [
+        "libs/cache/src/*"
+      ]
+    }
   }
 }
