@@ -1,3 +1,7 @@
+/**
+ * This file contains custom exceptions that can be thrown in the application.
+ * You may create this file in your project  and extend the BaseException class.
+ */
 import { HttpStatus } from '@nestjs/common';
 import { BaseException } from './base.exception';
 import { ExceptionCode } from './enum.exception';
