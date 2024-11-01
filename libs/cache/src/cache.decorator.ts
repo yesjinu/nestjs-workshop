@@ -1,3 +1,4 @@
+import { Logger } from '@nestjs/common';
 import { CacheService } from './cache.service';
 
 /**
@@ -27,9 +28,13 @@ export function Cacheable(_: { ttl: number }) {
       const cachedResult = cacheService.get(cacheKey);
 
       if (cachedResult !== null) {
+        Logger.debug(
+          `Cache hit: ${cacheKey} to ${JSON.stringify(cachedResult)}`,
+        );
         return cachedResult;
       }
 
+      Logger.debug(`Cache miss: ${cacheKey}`);
       const result = await originalMethod.apply(this, args);
       cacheService.set(cacheKey, result, ttl);
       return result;

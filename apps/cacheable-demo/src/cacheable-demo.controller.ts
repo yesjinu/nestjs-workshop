@@ -1,12 +1,17 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Param } from '@nestjs/common';
 import { CacheableDemoService } from './cacheable-demo.service';
 
-@Controller()
+@Controller('cache-demo')
 export class CacheableDemoController {
   constructor(private readonly cacheableDemoService: CacheableDemoService) {}
 
-  @Get()
-  getHello(): string {
-    return this.cacheableDemoService.getHello();
+  @Get('expensive')
+  async getExpensiveData() {
+    return this.cacheableDemoService.getExpensiveData();
+  }
+
+  @Get('user/:userId')
+  async getUserData(@Param('userId') userId: string) {
+    return this.cacheableDemoService.getUserData(userId);
   }
 }
