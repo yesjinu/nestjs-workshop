@@ -25,3 +25,4 @@ nest generate lib app_name
 - [ ] Health check
 - [ ] Metrics
 - [ ] Tracing
+- [ ] Event pub/sub
