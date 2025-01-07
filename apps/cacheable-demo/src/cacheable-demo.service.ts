@@ -28,7 +28,7 @@ export class CacheableDemoService {
     await this.cacheService.set(key, value, 10);
   }
 
-  async getCache(key: string): Promise<string> {
+  async getCache(key: string): Promise<string | null> {
     return await this.cacheService.get(key);
   }
 }
