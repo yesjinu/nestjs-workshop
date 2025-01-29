@@ -73,7 +73,8 @@
     ],
     "moduleNameMapper": {
       "^@app/cacheable(|/.*)$": "<rootDir>/libs/cacheable/src/$1",
-      "^@app/exception-filter(|/.*)$": "<rootDir>/libs/exception-filter/src/$1"
+      "^@app/exception-filter(|/.*)$": "<rootDir>/libs/exception-filter/src/$1",
+      "^@app/toolkit(|/.*)$": "<rootDir>/libs/toolkit/src/$1"
     }
   },
   "packageManager": "pnpm@8.15.6+sha1.8105075ad0aa306138be128c017e9c41e28ecffa"

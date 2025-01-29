@@ -1,9 +1,6 @@
-import {
-  assertNonNull,
-  assertTrue,
-} from 'apps/clean-architecture/src/toolkit/validator';
 import { AccountId } from '../../../domain/account-id';
 import { Money } from '../../../domain/money';
+import { Assert } from '@app/toolkit';
 
 export class SendMoneyCommand {
   constructor(
@@ -11,10 +8,10 @@ export class SendMoneyCommand {
     readonly targetAccountId: AccountId,
     readonly money: Money,
   ) {
-    assertNonNull(sourceAccountId);
-    assertNonNull(targetAccountId);
-    assertNonNull(money);
-    assertTrue(money.isPositive(), 'Amount must be greater than 0');
+    Assert.nonNull(sourceAccountId);
+    Assert.nonNull(targetAccountId);
+    Assert.nonNull(money);
+    Assert.isTrue(money.isPositive(), 'Amount must be greater than 0');
 
     this.sourceAccountId = sourceAccountId;
     this.targetAccountId = targetAccountId;

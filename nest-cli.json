@@ -61,6 +61,15 @@
       "compilerOptions": {
         "tsConfigPath": "apps/clean-architecture/tsconfig.app.json"
       }
+    },
+    "toolkit": {
+      "type": "library",
+      "root": "libs/toolkit",
+      "entryFile": "index",
+      "sourceRoot": "libs/toolkit/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/toolkit/tsconfig.lib.json"
+      }
     }
   },
   "monorepo": true,

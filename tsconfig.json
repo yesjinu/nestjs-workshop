@@ -18,10 +18,24 @@
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false,
     "paths": {
-      "@app/cacheable": ["libs/cache/src"],
-      "@app/cacheable/*": ["libs/cache/src/*"],
-      "@app/exception-filter": ["libs/exception-filter/src"],
-      "@app/exception-filter/*": ["libs/exception-filter/src/*"]
+      "@app/cacheable": [
+        "libs/cache/src"
+      ],
+      "@app/cacheable/*": [
+        "libs/cache/src/*"
+      ],
+      "@app/exception-filter": [
+        "libs/exception-filter/src"
+      ],
+      "@app/exception-filter/*": [
+        "libs/exception-filter/src/*"
+      ],
+      "@app/toolkit": [
+        "libs/toolkit/src"
+      ],
+      "@app/toolkit/*": [
+        "libs/toolkit/src/*"
+      ]
     }
   }
 }
