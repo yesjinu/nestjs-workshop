@@ -1,7 +1,5 @@
+import { SendMoneyCommand } from './send-money.command';
+
 export interface SendMoneyUseCase {
-  sendMoney(
-    fromAccountId: string,
-    toAccountId: string,
-    amount: number,
-  ): Promise<void>;
+  sendMoney(command: SendMoneyCommand): Promise<boolean>;
 }
