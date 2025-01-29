@@ -1,5 +1,5 @@
-import { Activity } from '../../../domain/Activity';
-
+import { AccountId } from '../../../domain/account-id';
+import { Activity } from '../../../domain/activity';
 export interface UpdateAccountStatePort {
-  updateActivities(accountId: string, activities: Activity[]): Promise<void>;
+  updateActivities(accountId: AccountId, activities: Activity[]): Promise<void>;
 }
