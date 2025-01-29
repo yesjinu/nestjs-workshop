@@ -1,4 +1,4 @@
-import { Account } from '../../../domain/Account.1';
+import { Account } from '../../../domain/account';
 
 export interface LoadAccountPort {
   loadAccount(accountId: string): Promise<Account>;
