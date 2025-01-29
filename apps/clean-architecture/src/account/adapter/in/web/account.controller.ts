@@ -1,13 +1,13 @@
 import { Body, Controller, Param, Post } from '@nestjs/common';
-import { SendMoneyService } from '../../../application/send-money.service';
 import { SendMoneyCommand } from '../../../application/port/in/send-money.command';
 import { AccountId } from '../../../domain/account-id';
 import { Money } from '../../../domain/money';
 import { SendMoneyDto } from './send-money.dto';
+import { SendMoneyUseCase } from '../../../application/port/in/send-money.usecase';
 
 @Controller()
 export class AccountController {
-  constructor(private readonly sendMoneyService: SendMoneyService) {}
+  constructor(private readonly sendMoneyUsecase: SendMoneyUseCase) {}
 
   @Post('accounts/send')
   async sendMoney(@Body() dto: SendMoneyDto): Promise<boolean> {
@@ -16,6 +16,6 @@ export class AccountController {
       new AccountId(dto.targetAccountId),
       new Money(dto.amount),
     );
-    return this.sendMoneyService.sendMoney(command);
+    return this.sendMoneyUsecase.sendMoney(command);
   }
 }
