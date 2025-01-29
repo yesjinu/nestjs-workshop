@@ -16,3 +16,12 @@ export function assertGreaterThan(
     throw new Error(message ?? `Value must be greater than ${min}`);
   }
 }
+
+export function assertTrue(
+  value: boolean,
+  message?: string,
+): asserts value is true {
+  if (!value) {
+    throw new Error(message ?? `Value must be true`);
+  }
+}
