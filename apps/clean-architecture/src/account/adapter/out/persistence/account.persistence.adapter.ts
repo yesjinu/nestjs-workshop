@@ -5,21 +5,55 @@ import { LoadAccountPort } from '../../../application/port/out/load-account.port
 import { Account } from '../../../domain/account';
 import { AccountId } from '../../../domain/account-id';
 import { Activity } from '../../../domain/activity';
-
+import { AccountPrismaEntity, ActivityPrismaEntity } from '@prisma/client';
+import { AccountMapper } from './account.mapper';
+import { ActivityMapper } from './activity.mapper';
 @Injectable()
 export class AccountPersistenceAdapter
   implements LoadAccountPort, UpdateAccountStatePort
 {
   constructor(private readonly prismaService: PrismaService) {}
 
-  loadAccount(accountId: AccountId): Promise<Account> {
-    throw new Error('Method not implemented.');
+  async loadAccount(
+    accountId: AccountId,
+    baselineDate: Date,
+  ): Promise<Account> {
+    const account: AccountPrismaEntity =
+      await this.prismaService.accountPrismaEntity.findFirstOrThrow({
+        where: {
+          id: accountId.id,
+        },
+      });
+
+    const activities: ActivityPrismaEntity[] =
+      await this.prismaService.activityPrismaEntity.findMany({
+        where: {
+          targetAccountId: accountId.id,
+          timestamp: {
+            gte: baselineDate,
+          },
+        },
+      });
+
+    const baselineBalance = 0; // TODO: calc account balance..
+
+    return AccountMapper.mapToDomainEntity(
+      account,
+      baselineBalance,
+      activities,
+    );
   }
 
-  updateActivities(
+  async updateActivities(
     accountId: AccountId,
     activities: Activity[],
   ): Promise<void> {
-    throw new Error('Method not implemented.');
+    activities.forEach(async (activity) => {
+      if (activity.id === null || activity.id === undefined) {
+        await this.prismaService.activityPrismaEntity.create({
+          data: ActivityMapper.mapToPrismaEntity(activity),
+        });
+      }
+    });
   }
 }

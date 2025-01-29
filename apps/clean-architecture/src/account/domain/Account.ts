@@ -4,9 +4,15 @@ import { ActivityWindow } from './activity-window';
 import { Money } from './money';
 
 export class Account {
-  private readonly id: AccountId;
-  private readonly baselineBalance: Money;
-  private readonly activityWindow: ActivityWindow;
+  constructor(
+    readonly id: AccountId,
+    readonly baselineBalance: Money,
+    readonly activityWindow: ActivityWindow,
+  ) {
+    this.id = id;
+    this.baselineBalance = baselineBalance;
+    this.activityWindow = activityWindow;
+  }
 
   calculateBalance(): Money {
     return Money.add(
@@ -21,6 +27,7 @@ export class Account {
     }
 
     const withdrawal = new Activity(
+      this.id.id,
       this.id,
       targetAccountId,
       new Date(),
@@ -36,7 +43,13 @@ export class Account {
   }
 
   deposit(money: Money, sourceAccountId: AccountId): boolean {
-    const deposit = new Activity(sourceAccountId, this.id, new Date(), money);
+    const deposit = new Activity(
+      this.id.id,
+      sourceAccountId,
+      this.id,
+      new Date(),
+      money,
+    );
     this.activityWindow.addActivity(deposit);
     return true;
   }

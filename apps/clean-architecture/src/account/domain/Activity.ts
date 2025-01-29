@@ -3,7 +3,7 @@ import { Money } from './money';
 
 export class Activity {
   constructor(
-    // readonly id: string,
+    readonly id: string,
     readonly fromAccountId: AccountId,
     readonly toAccountId: AccountId,
     readonly timestamp: Date,

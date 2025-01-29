@@ -5,6 +5,10 @@ export class Money {
     return new Money(arg1.amount + arg2.amount);
   }
 
+  getAmount(): number {
+    return this.amount;
+  }
+
   isPositive(): boolean {
     return this.amount > 0;
   }
