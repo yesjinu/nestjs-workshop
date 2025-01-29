@@ -52,6 +52,15 @@
       "compilerOptions": {
         "tsConfigPath": "apps/global-exception-handler-demo/tsconfig.app.json"
       }
+    },
+    "clean-architecture": {
+      "type": "application",
+      "root": "apps/clean-architecture",
+      "entryFile": "main",
+      "sourceRoot": "apps/clean-architecture/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/clean-architecture/tsconfig.app.json"
+      }
     }
   },
   "monorepo": true,
