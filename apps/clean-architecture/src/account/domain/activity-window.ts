@@ -3,7 +3,7 @@ import { Activity } from './activity';
 import { Money } from './money';
 
 export class ActivityWindow {
-  constructor(private readonly activities: Activity[]) {}
+  constructor(readonly activities: Activity[]) {}
 
   addActivity(activity: Activity): void {
     this.activities.push(activity);
