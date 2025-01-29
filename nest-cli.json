@@ -70,6 +70,15 @@
       "compilerOptions": {
         "tsConfigPath": "libs/toolkit/tsconfig.lib.json"
       }
+    },
+    "buckpal-prisma-schema": {
+      "type": "library",
+      "root": "libs/buckpal-prisma-schema",
+      "entryFile": "index",
+      "sourceRoot": "libs/buckpal-prisma-schema/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/buckpal-prisma-schema/tsconfig.lib.json"
+      }
     }
   },
   "monorepo": true,

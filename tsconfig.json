@@ -35,6 +35,12 @@
       ],
       "@app/toolkit/*": [
         "libs/toolkit/src/*"
+      ],
+      "@app/buckpal-prisma-schema": [
+        "libs/buckpal-prisma-schema/src"
+      ],
+      "@app/buckpal-prisma-schema/*": [
+        "libs/buckpal-prisma-schema/src/*"
       ]
     }
   }
