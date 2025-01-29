@@ -12,3 +12,20 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model AccountPrismaEntity {
+  id String @id @default(cuid())
+
+  @@map("account")
+}
+
+model ActivityPrismaEntity {
+  id              String   @id @default(cuid())
+  timestamp       DateTime @map("timestamp")
+  ownerAccountId  String   @map("owner_account_id")
+  sourceAccountId String   @map("source_account_id")
+  targetAccountId String   @map("target_account_id")
+  amount          Int      @map("amount")
+
+  @@map("activity")
+}
